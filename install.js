@@ -19,7 +19,7 @@ window.onload = () => {
     }
 
     function logAppInstalled(evt) {
-        console.log('ProjetoDDM App was installed.', evt);
+        console.log('App was installed.', evt);
     }
 
 }
