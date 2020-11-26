@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <title>juliano osmir</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="icon" href="images/icons/favicon.ico" type="image/x-icon" />
+</head>
+<body>
+    
+    <div class="container" style="margin-left: 50px; margin-right: 800px;">
+        <div id="Todos" class="row p-3 mb-2 bg-primary text-white divUsuario">
+            <div class="col-12"> Perfil de Todos </div>
+            <div class="col p-3 mb-2 bg-light text-dark">id</div>
+            <div class="col p-3 mb-2 bg-light text-dark" id="Id"></div>
+            <div class="w-100"></div>
+            <div class="col p-3 mb-2 bg-light text-dark">Titulo</div>
+            <div class="col p-3 mb-2 bg-light text-dark" id="title"></div>
+            <div class="col-12"></div>
+            <div class="col p-3 mb-2 bg-light text-dark">userId</div>
+            <div class="col p-3 mb-2 bg-light text-dark" id="userId"></div>
+            <div class="w-100"></div>
+            <div class="col p-3 mb-2 bg-light text-dark">completado</div>
+            <div class="col p-3 mb-2 bg-light text-dark" id="completado"></div>
+            <div class="w-100"></div>
+            <div class="col p-3 mb-2 bg-light text-dark">
+                <button type="button" onclick="Voltar()" class="btn btn-success btn-lg btn-block">
+                    Voltar
+                </button>
+            </div>
+            <div class="col p-3 mb-2 bg-light text-dark" id="zipcode">
+                <button type="button" onclick="Proximo()" class="btn btn-success btn-lg btn-block">
+                    Proximo
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+<script>
+
+var position = 0;
+    window.onload = async function () {
+        var url = 'https://jsonplaceholder.typicode.com/todos'
+        $.get(url, (res) => {
+            n1 = res.length;
+
+            Imprimir(res[0].id);
+        })
+    }
+
+    async function Imprimir(Id) {
+        var url = 'https://jsonplaceholder.typicode.com/todos/' + Id
+        $.get(url, (res) => {
+            CriarTabela(res);
+        })
+
+    }
+    function CriarTabela(obj) {
+        // console.log(obj);
+        $("#Todos").css("display",'flex');
+        $("#Id").html(obj.id);
+        $("#title").html(obj.title);
+        $("#userId").html(obj.userId);
+        $("#completado").html(obj.id);
+    }
+    function Voltar() {
+        if (position > 1) {
+            position -= 1;
+            Imprimir(position);
+        } else {
+            //   console.log("position",position)
+        }
+
+    }
+    function Proximo() {
+        if (position < n1) {
+            position += 1;
+            Imprimir(position);
+        } else {
+            // console.log("position",position)
+        }
+    }
+
+</script>
+
+</body>
+</html>
